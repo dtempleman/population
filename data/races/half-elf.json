@@ -1,0 +1,6 @@
+{
+    "name": "half-elf",
+    "compatibility": ["elf", "human"],
+    "adulthood": 20,
+    "life_expenctantcy": 150
+}

@@ -1,0 +1,6 @@
+{
+    "name": "human",
+    "compatibility": ["elf", "orc"],
+    "adulthood": 18,
+    "life_expenctantcy": 80
+}

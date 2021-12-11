@@ -1,0 +1,6 @@
+{
+    "name": "half-orc",
+    "compatibility": ["human", "orc"],
+    "adulthood": 15,
+    "life_expenctantcy": 70
+}
