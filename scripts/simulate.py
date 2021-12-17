@@ -1,7 +1,12 @@
-from population.citizen import Citizen
-from population.race import load_all_races
+from numpy import array, dtype, ndarray
+from numpy.core.fromnumeric import std
+from numpy.random.mtrand import rand
+from population.being import Creature, calculate_age
+from population.race import load_all_races, random_normalized_age
 
 import random
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def generate_initial_population(population_size):
@@ -16,28 +21,37 @@ def generate_initial_population(population_size):
 
     population = []
     for _ in range(population_size):
-        cit = Citizen(
-            random.choice(list(races.values())),
-            current_year=current_year,
-        )
-        population.append(cit)
+        race = random.choice(list(races.values()))
+        age = random_normalized_age(race)
+        birth_year = current_year - age
 
-    for cit in population:
-        print(f'{cit}. Age {cit.calculate_age(current_year)}')
+        creature = Creature(
+            name="test",
+            race=race,
+            birth_year=birth_year,
+        )
+        population.append(creature)
+
+    for creature in population:
+        print(f'{creature}.\t\tAge {calculate_age(creature, current_year)}')
+
+
+def role_age():
+    dice_size = 6
+    max_age = 80
+    n_dice = int(max_age / dice_size + 1)
+
+    roles = [random.randint(0, dice_size) for i in range(n_dice)]
+    return sum(roles)
+
+
+def truncate_normal_distribution(mean,  maxval, minval=0, stddev=1.0):
+    return np.clip(np.random.normal(mean, stddev), minval, maxval)
 
 
 if __name__ == "__main__":
+    seed = 0
+    #np.random.seed(seed)
+    #random.seed(seed)
+
     generate_initial_population(10)
-    
-    import numpy as np
-
-    mu, sigma = 26, 10 # mean and standard deviation
-
-    s = np.random.normal(mu, sigma, 10000)
-
-    import matplotlib.pyplot as plt
-    count, bins, ignored = plt.hist(s, 30, density=True)
-    plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-                np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-            linewidth=2, color='r')
-    plt.show()
