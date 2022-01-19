@@ -19,7 +19,7 @@ class Race():
 
 
 def random_normalized_age(race):
-    mu = race.adulthood + (race.life_expectantcy / 10)
+    mu = race.adulthood + int(race.life_expectantcy / 10)
     sigma = int(race.life_expectantcy / 15)
     return int(np.random.normal(mu, sigma))
 
