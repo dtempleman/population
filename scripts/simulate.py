@@ -18,7 +18,6 @@ def generate_initial_random_population(population_size, current_year):
     population = []
     for i in range(population_size):
         race = random.choice(list(races.values()))
-        # race = races['elf']
         age = random_normalized_age(race)
         birth_year = current_year - age
 
